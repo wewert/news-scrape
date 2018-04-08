@@ -19,7 +19,7 @@ app.set('view engine', 'handlebars');
 
 app.use(express.static('public'));
 
-var databaseUrl = 'mongodb://localhost/news-scraperDB'
+var databaseUrl = 'mongodb://heroku_ctsbrs2t:st6ft1h2bpalppp53n247empv5@ds159013.mlab.com:59013/heroku_ctsbrs2t'
 
 if (process.env.MONGODB_URI) {
   mongoose.connect(databaseUrl)
@@ -42,45 +42,3 @@ require('./controllers/controller.js')(app);
 app.listen(port, function(){
   console.log('Running on port: ' + port);
 });
-
-// var databaseUri = 'mongodb://localhost/news-scrape';
-//
-// if(process.env.MONGODB_URI) {
-//   mongoose.connect(process.env.MONGODB_URI);
-// } else {
-//   mongoose.connect(databaseUri);
-// }
-//
-// var db = mongoose.connection;
-//
-// db.on('error', function(err) {
-//   console.log('Mongoose Error: ', err);
-// });
-//
-// db.once('open', function() {
-//   console.log('Mongoose connection successful.');
-// });
-//
-//
-// app.get("/scrape", function(req, res) {
-//   request("https://longreads.com/", function(error, response, html) {
-//     var $ = cheerio.load(html);
-//     $(".grid-article").each(function(i, element) {
-//       var result = {};
-//       result.title = $(this).children("a").text();
-//       result.link = $(this).children("a").attr("href");
-//       var entry = new Article(result);
-//       console.log(entry);
-//       entry.save(function(err, doc) {
-//         if (err) {
-//           console.log(err);
-//         }
-//         else {
-//           console.log(doc);
-//         }
-//       });
-//
-//     });
-//   });
-//   res.send("Scrape Complete");
-// });
