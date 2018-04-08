@@ -1,7 +1,7 @@
 var express = require("express");
 var exphbs = require('express-handlebars');
 var bodyParser = require("body-parser");
-var logger = require("morgan");
+// var logger = require("morgan");
 var mongoose = require("mongoose");
 
 mongoose.Promise = Promise;
@@ -9,7 +9,7 @@ mongoose.Promise = Promise;
 var app = express();
 var port = process.env.PORT || 3000;
 
-app.use(logger('dev'));
+// app.use(logger('dev'));
 app.use(bodyParser.urlencoded({
   extended: false
 }))
