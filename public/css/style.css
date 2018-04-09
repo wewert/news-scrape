@@ -40,6 +40,12 @@ p#note-title {
   font-size: 30px;
 }
 
+input {
+  width: 200px;
+  height: 40px;
+  font-size: 20px;
+}
+
 button {
   -webkit-transition-duration: 0.4s; /* Safari */
     transition-duration: 0.4s;

@@ -4,15 +4,14 @@
     {{#each result}}
       <div class="col-md-4">
         <div class="row">
-          <div class="news-container" data-id="{{this._id}}">
+          <div class="container" data-id="{{this._id}}">
             <h3>{{this.title}}</h3>
-              <p class="news-summary">{{this.summary}}</p>
-              <a class="news-url" href="{{this.link}}">{{this.link}}</a>
+              <p class="summary">{{this.summary}}</p>
+              <a class="url" href="{{this.link}}">{{this.link}}</a>
               <p id="note-title">Notes</p>
                 {{#if this.note}}
                   {{#each this.note}}
                     <p id="note">{{this.note}}</p>
-                      <!-- <p id="note-time">{{this.created_time}}</p> -->
                         {{/each}}
                       {{/if}}
             </div>
@@ -23,7 +22,8 @@
             <input type="text" id="note-input">
           </div>
           <div class="col-md-5">
-            <button type="submit" id="save-note" class="btn-sml btn-outline-secondary">Note</button>
+            <button type="submit" id="save-note" class="btn-sml btn-outline-secondary">Make Note</button>
+            <button type="submit" id="delete-note" class="btn-sml btn-outline-secondary">Delete Note</button>
           </div>
         </div>
       </div>
