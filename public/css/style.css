@@ -1,3 +1,51 @@
 body {
-  color: red;
+  font-family: 'Abril Fatface', cursive;
+  background: #123772;
+  text-shadow: -1px 0 teal, 0 1px teal, 1px 0 teal, 0 -1px teal;
+}
+
+#parallax {
+    /* The image used */
+    background-image: url("/css/images/news_room.jpg");
+
+    /* Set a specific height */
+    min-height: 500px;
+
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 20px;
+}
+
+h2 {
+  color: white;
+  text-align: center;
+  font-size: 60px;
+  text-shadow: -1px 0 teal, 0 10px teal, 10px 0 teal, 0 -1px teal;
+}
+
+h3 {
+  color: darkorange;
+  font-size: 30px;
+}
+
+p {
+  color: white;
+}
+
+p#note-title {
+  color: white;
+  font-size: 30px;
+}
+
+button {
+  -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+}
+
+button:hover {
+    background-color: #4CAF50; /* Green */
+    color: white;
 }

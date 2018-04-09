@@ -1,3 +1,4 @@
+<div id="parallax">
 <div class="container">
   <div class="row">
     {{#each result}}
@@ -11,7 +12,7 @@
                 {{#if this.note}}
                   {{#each this.note}}
                     <p id="note">{{this.note}}</p>
-                      <p id="note-time">{{this.created_time}}</p>
+                      <!-- <p id="note-time">{{this.created_time}}</p> -->
                         {{/each}}
                       {{/if}}
             </div>
@@ -28,4 +29,5 @@
       </div>
     </div>
   {{/each}}
+</div>
 </div>

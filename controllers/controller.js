@@ -1,7 +1,8 @@
-var request = require('request');
-var cheerio = require('cheerio');
-var Note = require('../models/Note.js');
-var Article = require('../models/Article.js');
+const request = require('request');
+const cheerio = require('cheerio');
+const Note = require('../models/Note.js');
+const Article = require('../models/Article.js');
+const db = require("./models");
 
 module.exports = function(app){
 
@@ -13,12 +14,11 @@ module.exports = function(app){
         request("https://longreads.com/", function(error, response, html) {
             var $ = cheerio.load(html);
 
-            $(".grid-title").each(function(i, element) {
+            $("article").each(function(i, element) {
 
             var title = $(element).find("a").text();
             var summary = $(element).find("p").text();
-
-            var link = $(element).find(".more-link").attr("href");
+            var link = $(element).find("a").attr("href");
 
             if (title && summary && link) {
                 var result = { title, summary, link };
@@ -48,18 +48,22 @@ module.exports = function(app){
         .sort({'_id': -1})
     });
 
-    app.get("/article/:id", function (req, res) {
-        Article.findOne({"_id": req.params.id})
-        .populate("note")
-        .exec(function (error, doc) {
-            if (error) {
-              console.log(error
-              );
-            } else {
-              res.render("notes", {result: doc});
-            }
-        });
+    // Route for grabbing a specific Article by id, populate it with it's note
+app.get("/articles/:id", function(req, res) {
+  // Using the id passed in the id parameter, prepare a query that finds the matching one in our db...
+  db.Article
+    .findOne({ _id: req.params.id })
+    // ..and populate all of the notes associated with it
+    .populate("note")
+    .then(function(dbArticle) {
+      // If we were able to successfully find an Article with the given id, send it back to the client
+      res.json(dbArticle);
+    })
+    .catch(function(err) {
+      // If an error occurred, send it to the client
+      res.json(err);
     });
+});
 
   app.post("/articles/:id", function (req, res) {
     Note.create(req.body, function (error, doc) {
@@ -88,4 +92,24 @@ module.exports = function(app){
         }
       });
   });
+
+  app.get("/delete/:id", function(req, res) {
+  // Remove a note using the objectID
+  db.Article.update(
+    {  _id: req.params.id },
+    { $unset: {note: "" }})
+  .then(function(error, removed) {
+    // Log any errors from mongojs
+    if (error) {
+      console.log(error);
+      res.send(error);
+    }
+    // Otherwise, send the mongojs response to the browser
+    else {
+      console.log(removed);
+      res.send(removed);
+    }
+  });
+});
+
 }
