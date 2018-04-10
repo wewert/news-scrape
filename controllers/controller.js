@@ -95,7 +95,7 @@ app.get("/articles/:id", function(req, res) {
 
   app.get("/delete/:id", function(req, res) {
   // Remove a note using the objectID
-  db.Article.update(
+  Article.update(
     {  _id: req.params.id },
     { $unset: {note: "" }})
   .then(function(error, removed) {
